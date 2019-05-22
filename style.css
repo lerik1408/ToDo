@@ -1,0 +1,75 @@
+header{
+    background-color:rgb(40, 40, 40);
+}
+header div span{
+    color:wheat
+}
+label{
+    color:wheat;
+    user-select: none
+}
+#search{
+    opacity: 0.2;
+}
+section{
+    background-color:rgb(31, 31, 31);
+}
+#wrap-control{
+    background-color:rgb(40, 40, 40);
+}
+#add{
+    opacity: 0.2;
+    /* visibility: hidden */
+}
+#create{
+    background-color:white
+}
+.control{
+    color:wheat;
+    cursor: pointer;
+}
+#add-project{
+    cursor: pointer;
+}
+#content button{
+    background-color: tomato;
+}
+.wrap-add-task{
+    /* visibility: hidden; */
+}
+.show-add-task{
+    cursor: pointer;
+    user-select: none
+}
+.show-add-task::before{
+    content: "+";
+    color: tomato;
+}
+.show-add-task:hover{
+    color: tomato;
+}
+.show-add-task:hover::before{
+    /* width: 2px; */
+    /* height: 2px; */
+    border-radius: 5px;
+    background-color: black;
+}
+.remove{
+    display: block;
+    cursor: pointer;
+    color:red;
+}
+.done{
+    color:yellow;
+    display: block;
+}
+
+
+footer{
+    width: 100wh;
+    height: 200px;
+    background-color:rgb(40, 40, 40);
+}
+
+
+

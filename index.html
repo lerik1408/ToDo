@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <header class="container-fluid">
+        <div class="container">
+            <div class="row align-items-center">
+                <span class="col">ToDo</span>
+                <div class="col-8 row m-1">
+                    <label for="search">Быстрый поиск</label>
+                    <input type="text" class="ml-2 form-control-sm col-8" id="search">
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 mt-5 mb-5"id="wrap-control">
+                    <div class="control mb-5">
+                        Показать проекты
+                    </div>
+                    <div class="input-group row">
+                        <label for="add" class="col-12" id="add-project">Добавить проект</label>
+                        <input type="text" class="ml-2 form-control" id="add">
+                        <div class="input-group-append">
+                            <button class="btn" type="button" id="create">Создать</button>
+                        </div>
+                    </div>
+                    <div class="control mt-5 mb-5">
+                            Показать удалённые проекты
+                    </div>
+                </div>
+                <div class="col-8 ml-2  row" id="content">
+                    <div class="card ml-2 mt-2 col-12">
+                        <div class="card-body">
+                            <h4 class="card-title">Название проекта</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item wrap-add-task">
+                                    <button class="btn btn-task mb-1" type="button">Добавить задачу</button>
+                                    <input type="text" class="form-control task">                      
+                                </li>
+                                <p class="show-add-task">Добавить задание</p>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card ml-2 mt-2 col-5">
+                        <div class="card-body">
+                            <h4 class="card-title">Название проекта</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <p>Добавить задачу</p>
+                                    <input type="text" class="form-control task d-none">
+                                </li>
+                                <li class="list-group-item">
+                                    <p>Добавить задачу</p>
+                                    <input type="text" class="form-control task d-none">
+                                </li>
+                                <li class="list-group-item">
+                                    <p>Добавить задачу</p>
+                                    <input type="text" class="form-control task d-none">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
