@@ -24,27 +24,28 @@ document.addEventListener('DOMContentLoaded',()=>{
         }
     }
     AddListenerShowingButton(0)
+    
+    let removeSpan = document.getElementsByClassName('del');
+    let content =document.getElementById('content');
+    function AddLisenerRemoveSpan(n){
+        for(let i=n;i<removeSpan.length;i++){
+            removeSpan[i].addEventListener('click',(event)=>{
+                event.target.parentElement.remove();
+            });
+            // removeSpan[i].parentElement.remove();
+        }
+    }
+    AddLisenerRemoveSpan(0)
 
-    // function AddListenerShowingButton(){
-    //     for(let i = 0;i<showingButton.length;i++){
-    //         showingButton[i].addEventListener('click',(event)=>{
-    //             if(showingButton[i]===event.target){
-    //                 if(getComputedStyle(document.getElementsByClassName('wrap-add-task')[i]).visibility==='visible'){
-    //                     document.getElementsByClassName('wrap-add-task')[i].style.visibility='hidden'
-    //                 }else{
-    //                     document.getElementsByClassName('wrap-add-task')[i].style.visibility='visible'
-    //                 }  
-    //             } 
-    //         });
-    //     }
-    // }
-    // AddListenerShowingButton()
     let classesSetingsCard = {
         firstDiv: {
             col :  "col-12",
             ml  :  "ml-2",
             mt  :  "mt-2",
             card : "card"
+        },
+        remove: {
+            del:'del'
         },
         secondDiv:{
             body : "card-body",
@@ -80,6 +81,12 @@ document.addEventListener('DOMContentLoaded',()=>{
             let div = document.createElement('div');
             div.className = `${classesSetingsCard.firstDiv.col} ${classesSetingsCard.firstDiv.ml} ${classesSetingsCard.firstDiv.mt} ${classesSetingsCard.firstDiv.card}`;
             document.getElementById('content').appendChild(div);
+        },
+        remove:(i) =>{
+            let span = document.createElement('span');
+            span.classList = `${classesSetingsCard.remove.del}`;
+            span.textContent = '+'
+            document.getElementsByClassName('card')[i].appendChild(span)
         },
         secondDiv:(i) => {
             let div = document.createElement('div');
@@ -128,17 +135,6 @@ document.addEventListener('DOMContentLoaded',()=>{
             p.textContent='Добавить задание';
             document.getElementsByClassName('list-group')[i].appendChild(p);
         }
-        // p:(i) => {
-        //     let p = document.createElement('p');
-        //     p.textContent = 'Добавить задачу';
-        //     document.getElementsByClassName('list-group-item')[i].appendChild(p)
-        // },
-        // input:(i)=>{
-        //     let input = document.createElement('input');
-        //     input.className =`${classesSetingsCard.input.classSetings.form} ${classesSetingsCard.input.classSetings.task} ${classesSetingsCard.input.classSetings.display}`;
-        //     input.type = `${classesSetingsCard.input.typeSetings.type}`;
-        //     document.getElementsByClassName('list-group-item')[i].appendChild(input);
-        // }
     };
     let inputTask = document.getElementsByClassName('task');
     let buttonTask = document.getElementsByClassName('btn-task');
@@ -146,19 +142,26 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     document.getElementById('create').addEventListener('click',()=>{
         let value = document.getElementById('add').value;
-        const amoutCard = document.getElementsByClassName('card').length
-        const amoutli= document.getElementsByClassName('list-group-item').length
-        CreateCard.firstDiv();
-        CreateCard.secondDiv(amoutCard);
-        CreateCard.h4(value, amoutCard);
-        CreateCard.ul(amoutCard);
-        CreateCard.li(amoutCard);
-        CreateCard.button(amoutli);
-        CreateCard.input(amoutli);
-        CreateCard.p(amoutCard);
-        AddLisener(buttonTask.length-1);
-        AddListenerShowingButton(showingButton.length-1);
-        document.getElementById('add').value='';
+        if(value===''){
+            alert('Строка не может быть пустой')
+        }else{
+            const amoutCard = document.getElementsByClassName('card').length
+            const amoutli= document.getElementsByClassName('list-group-item').length
+            CreateCard.firstDiv();
+            CreateCard.remove(amoutCard);
+            CreateCard.secondDiv(amoutCard);
+            CreateCard.h4(value, amoutCard);
+            CreateCard.ul(amoutCard);
+            CreateCard.li(amoutCard);
+            CreateCard.button(amoutli);
+            CreateCard.input(amoutli);
+            CreateCard.p(amoutCard);
+            AddLisener(buttonTask.length-1);
+            AddListenerShowingButton(showingButton.length-1);
+            AddLisenerRemoveSpan(removeSpan.length-1);
+           
+            document.getElementById('add').value='';
+        }
     });
 
   
@@ -204,17 +207,10 @@ document.addEventListener('DOMContentLoaded',()=>{
             })
         }
     }
-    AddLisener(0)
-    // for(let i = 0;i<buttonTask.length;i++){
-    //     buttonTask[i].addEventListener('click',(event) =>{
-    //         if(buttonTask[i]===event.target&&inputTask[i].value!=''){
-    //             let text = inputTask[i].value;
-    //             CreateCard.li(i,text);
-    //             inputTask[i].value='';
-    //             CreateControl.remove(i)
-    //             CreateControl.done(i)
-    //         }
-    //     })
-    // }
- 
+    AddLisener(0);
+
+
+
+    
+    
 })
