@@ -9,21 +9,39 @@ document.addEventListener('DOMContentLoaded',()=>{
         }
     });
     let showingButton = document.getElementsByClassName('show-add-task');
-    for(let i = 0;i<showingButton.length;i++){
-        showingButton[i].addEventListener('click',(event)=>{
-            if(showingButton[i]===event.target){
-                if(getComputedStyle(document.getElementsByClassName('wrap-add-task')[i]).visibility==='visible'){
-                    document.getElementsByClassName('wrap-add-task')[i].style.visibility='hidden'
-                }else{
-                    document.getElementsByClassName('wrap-add-task')[i].style.visibility='visible'
-                }  
-            } 
-        });
-    }
 
+    function AddListenerShowingButton(n){
+        for(let i = n;i<showingButton.length;i++){
+            showingButton[i].addEventListener('click',(event)=>{
+                if(showingButton[i]===event.target){
+                    if(getComputedStyle(document.getElementsByClassName('wrap-add-task')[i]).display==='none'){
+                        document.getElementsByClassName('wrap-add-task')[i].style.display='block'
+                    }else{
+                        document.getElementsByClassName('wrap-add-task')[i].style.display='none'
+                    }  
+                } 
+            });
+        }
+    }
+    AddListenerShowingButton(0)
+
+    // function AddListenerShowingButton(){
+    //     for(let i = 0;i<showingButton.length;i++){
+    //         showingButton[i].addEventListener('click',(event)=>{
+    //             if(showingButton[i]===event.target){
+    //                 if(getComputedStyle(document.getElementsByClassName('wrap-add-task')[i]).visibility==='visible'){
+    //                     document.getElementsByClassName('wrap-add-task')[i].style.visibility='hidden'
+    //                 }else{
+    //                     document.getElementsByClassName('wrap-add-task')[i].style.visibility='visible'
+    //                 }  
+    //             } 
+    //         });
+    //     }
+    // }
+    // AddListenerShowingButton()
     let classesSetingsCard = {
         firstDiv: {
-            col :  "col-5",
+            col :  "col-12",
             ml  :  "ml-2",
             mt  :  "mt-2",
             card : "card"
@@ -39,17 +57,22 @@ document.addEventListener('DOMContentLoaded',()=>{
             list_group_flush:"list-group-flush"
         },
         li:{
-            list_group_item:"list-group-item"
+            list_group_item:"list-group-item",
+            wrap: "wrap-add-task"
+        },
+        button:{
+            btn:"btn",
+            btn_task:"btn-task",
+            mb: 'mb-1',
+            type: "button"
         },
         input:{
-            classSetings:{
-                form:"form-control",
-                task : "task",
-                display: 'd-none'
-            },
-            typeSetings:{
-                type: "text"
-            }
+            form: 'form-control',
+            task: 'task',
+            type: 'text'
+        },
+        p:{
+            show:'show-add-task'
         }
     };
     let CreateCard = {
@@ -77,23 +100,50 @@ document.addEventListener('DOMContentLoaded',()=>{
         li:(i,name) => {
             let li = document.createElement('li');
             if(name){
-                li.textContent = `${name}`
+                let p =document.createElement('p')
+                p.textContent = `${name}`;
+                li.appendChild(p);
+            }else{
+            li.className=`${classesSetingsCard.li.wrap}`
             }
-            li.className =`${classesSetingsCard.li.list_group_item}`;
+            li.className+=` ${classesSetingsCard.li.list_group_item}`;
             document.getElementsByClassName('list-group')[i].appendChild(li)
         },
-        p:(i) => {
-            let p = document.createElement('p');
-            p.textContent = 'Добавить задачу';
-            document.getElementsByClassName('list-group-item')[i].appendChild(p)
+        button:(i)=>{
+            let button = document.createElement('button');
+            button.className =`${classesSetingsCard.button.btn} ${classesSetingsCard.button.btn_task} ${classesSetingsCard.button.mb}`;
+            button.type =`${classesSetingsCard.button.type}`;
+            button.textContent='Добавить задачу';
+            document.getElementsByClassName('list-group-item')[i].appendChild(button);
         },
         input:(i)=>{
-            let input = document.createElement('input');
-            input.className =`${classesSetingsCard.input.classSetings.form} ${classesSetingsCard.input.classSetings.task} ${classesSetingsCard.input.classSetings.display}`;
-            input.type = `${classesSetingsCard.input.typeSetings.type}`;
+            let input =document.createElement('input');
+            input.className=`${classesSetingsCard.input.form} ${classesSetingsCard.input.task}`
+            input.type =`${classesSetingsCard.input.type}`;
             document.getElementsByClassName('list-group-item')[i].appendChild(input);
+        },
+        p:(i)=>{
+            let p =document.createElement('p');
+            p.className=`${classesSetingsCard.p.show}`;
+            p.textContent='Добавить задание';
+            document.getElementsByClassName('list-group')[i].appendChild(p);
         }
+        // p:(i) => {
+        //     let p = document.createElement('p');
+        //     p.textContent = 'Добавить задачу';
+        //     document.getElementsByClassName('list-group-item')[i].appendChild(p)
+        // },
+        // input:(i)=>{
+        //     let input = document.createElement('input');
+        //     input.className =`${classesSetingsCard.input.classSetings.form} ${classesSetingsCard.input.classSetings.task} ${classesSetingsCard.input.classSetings.display}`;
+        //     input.type = `${classesSetingsCard.input.typeSetings.type}`;
+        //     document.getElementsByClassName('list-group-item')[i].appendChild(input);
+        // }
     };
+    let inputTask = document.getElementsByClassName('task');
+    let buttonTask = document.getElementsByClassName('btn-task');
+    let ul = document.getElementsByClassName('list-group');
+
     document.getElementById('create').addEventListener('click',()=>{
         let value = document.getElementById('add').value;
         const amoutCard = document.getElementsByClassName('card').length
@@ -103,15 +153,15 @@ document.addEventListener('DOMContentLoaded',()=>{
         CreateCard.h4(value, amoutCard);
         CreateCard.ul(amoutCard);
         CreateCard.li(amoutCard);
-        CreateCard.p(amoutli);
+        CreateCard.button(amoutli);
         CreateCard.input(amoutli);
+        CreateCard.p(amoutCard);
+        AddLisener(buttonTask.length-1);
+        AddListenerShowingButton(showingButton.length-1);
         document.getElementById('add').value='';
     });
 
-    let inputTask = document.getElementsByClassName('task');
-    let buttonTask = document.getElementsByClassName('btn-task');
-    let ul = document.getElementsByClassName('list-group');
-    // let li =document.getElementsByClassName('list-group-item')
+  
 
     let CreateControl ={
         remove : (i) => {
@@ -130,28 +180,41 @@ document.addEventListener('DOMContentLoaded',()=>{
             done.textContent='Заверешено'
             ul[i].lastChild.appendChild(done);
             done.addEventListener('click',(event)=>{
-                let li=event.target.parentNode;
-                // li.style.background="black";
-                if(li.style.background==='grey'){
-                    li.style.background='white'
+                let p=event.target.parentNode.firstChild;
+                if(p.style.opacity!=="0.3"){
+                    p.style.opacity="0.3";
+                    p.style.textDecoration = "line-through ";
                 }else{
-                    li.style.background="grey"
+                    p.style.opacity="1";
+                    p.style.textDecoration = "none ";
                 }
             });
         }
     }
-
-
-    for(let i = 0;i<buttonTask.length;i++){
-        buttonTask[i].addEventListener('click',(event) =>{
-            if(buttonTask[i]===event.target&&inputTask[i].value!=''){
-                let text = inputTask[i].value;
-                CreateCard.li(i,text);
-                inputTask[i].value='';
-                CreateControl.remove(i)
-                CreateControl.done(i)
-            }
-        })
+     function AddLisener(n){
+         for(let i = n;i<buttonTask.length;i++){
+            buttonTask[i].addEventListener('click',(event) =>{
+                if(buttonTask[i]===event.target&&inputTask[i].value!=''){
+                    let text = inputTask[i].value;
+                    CreateCard.li(i,text);
+                    inputTask[i].value='';
+                    CreateControl.remove(i)
+                    CreateControl.done(i)
+                }
+            })
+        }
     }
+    AddLisener(0)
+    // for(let i = 0;i<buttonTask.length;i++){
+    //     buttonTask[i].addEventListener('click',(event) =>{
+    //         if(buttonTask[i]===event.target&&inputTask[i].value!=''){
+    //             let text = inputTask[i].value;
+    //             CreateCard.li(i,text);
+    //             inputTask[i].value='';
+    //             CreateControl.remove(i)
+    //             CreateControl.done(i)
+    //         }
+    //     })
+    // }
  
 })

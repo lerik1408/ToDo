@@ -11,6 +11,7 @@ label{
 #search{
     opacity: 0.2;
 }
+/*  */
 section{
     background-color:rgb(31, 31, 31);
 }
@@ -31,11 +32,24 @@ section{
 #add-project{
     cursor: pointer;
 }
+/*  */
+#content .card{
+    background-color:rgb(40, 40, 40);
+    color:wheat;
+}
+#content h4{
+}
 #content button{
     background-color: tomato;
 }
-.wrap-add-task{
-    /* visibility: hidden; */
+#content .list-group-item{
+    background-color:rgb(40, 40, 40);
+}
+#content .wrap-add-task{
+    display: none
+}
+#content .wrap-add-task input{
+    background-color:wheat
 }
 .show-add-task{
     cursor: pointer;
@@ -48,21 +62,18 @@ section{
 .show-add-task:hover{
     color: tomato;
 }
-.show-add-task:hover::before{
-    /* width: 2px; */
-    /* height: 2px; */
-    border-radius: 5px;
-    background-color: black;
-}
 .remove{
     display: block;
     cursor: pointer;
-    color:red;
+    color:tomato;
+    user-select: none;
 }
 .done{
-    color:yellow;
+    color:white;
     display: block;
+    user-select: none;
 }
+
 
 
 footer{
