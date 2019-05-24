@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded',()=>{
+    //Показывать или скрывать инпут создания проекта
     document.getElementById('add-project').addEventListener('click',(event)=>{
         if(getComputedStyle(document.getElementById('add')).visibility==='visible'){
             document.getElementById('add').style.visibility='hidden';
@@ -8,8 +9,8 @@ document.addEventListener('DOMContentLoaded',()=>{
             document.getElementById('create').style.visibility='visible';
         }
     });
+    //Показывать или скрывать инпуты для создания таска
     let showingButton = document.getElementsByClassName('show-add-task');
-
     function AddListenerShowingButton(n){
         for(let i = n;i<showingButton.length;i++){
             showingButton[i].addEventListener('click',(event)=>{
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
     AddListenerShowingButton(0)
     
+    //Удаление проекта
     let removeSpan = document.getElementsByClassName('del');
     let content =document.getElementById('content');
     function AddLisenerRemoveSpan(n){
@@ -32,16 +34,16 @@ document.addEventListener('DOMContentLoaded',()=>{
             removeSpan[i].addEventListener('click',(event)=>{
                 event.target.parentElement.remove();
             });
-            // removeSpan[i].parentElement.remove();
         }
     }
     AddLisenerRemoveSpan(0)
 
+    //Об. с классами
     let classesSetingsCard = {
         firstDiv: {
             col :  "col-12",
             ml  :  "ml-2",
-            mt  :  "mt-2",
+            mt  :  "mt-2 mb-2",
             card : "card"
         },
         remove: {
@@ -76,6 +78,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             show:'show-add-task'
         }
     };
+    //Об. с методами создания
     let CreateCard = {
         firstDiv: () => {
             let div = document.createElement('div');
@@ -136,10 +139,10 @@ document.addEventListener('DOMContentLoaded',()=>{
             document.getElementsByClassName('list-group')[i].appendChild(p);
         }
     };
+    // Создание проекта
     let inputTask = document.getElementsByClassName('task');
     let buttonTask = document.getElementsByClassName('btn-task');
     let ul = document.getElementsByClassName('list-group');
-
     document.getElementById('create').addEventListener('click',()=>{
         let value = document.getElementById('add').value;
         if(value===''){
@@ -165,7 +168,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
 
   
-
+    // Удаление и завершение задачи
     let CreateControl ={
         remove : (i) => {
             let remove = document.createElement('span');
@@ -187,9 +190,11 @@ document.addEventListener('DOMContentLoaded',()=>{
                 if(p.style.opacity!=="0.3"){
                     p.style.opacity="0.3";
                     p.style.textDecoration = "line-through ";
+                    done.textContent='Не заверешено'
                 }else{
                     p.style.opacity="1";
                     p.style.textDecoration = "none ";
+                    done.textContent='Заверешено'
                 }
             });
         }
@@ -208,9 +213,26 @@ document.addEventListener('DOMContentLoaded',()=>{
         }
     }
     AddLisener(0);
+    // Поиск
+    let search = document.getElementById('search');
+    search.addEventListener('click',()=>{
+        let h4 = document.getElementsByClassName('card-title');
+        let textTitle= [];
+        for(let i=0;i<h4.length;i++){
+            textTitle[i]=h4[i].textContent
+        }
+        console.log(textTitle)
+        search.addEventListener('input',(event) =>{
+            var regexp = new RegExp(event.target.value)
+            console.log(textTitle[0].search(regexp))
+            for(let i=0;i<textTitle.length;i++){
+                if(textTitle[i].search(regexp)!==-1){
+                    h4[i].parentElement.parentElement.style.display='block'
+                }else{
+                    h4[i].parentElement.parentElement.style.display='none'
+                }
+            }
+        })
+    })
 
-
-
-    
-    
 })

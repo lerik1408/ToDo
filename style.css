@@ -9,7 +9,7 @@ label{
     user-select: none
 }
 #search{
-    opacity: 0.2;
+    opacity: 0.5;
 }
 /*  */
 section{
@@ -17,10 +17,10 @@ section{
 }
 #wrap-control{
     background-color:rgb(40, 40, 40);
+    max-height: 100px
 }
 #add{
-    opacity: 0.2;    
-    /* visibility: hidden */
+    opacity: 0.5;    
 }
 
 #create{
@@ -89,6 +89,7 @@ section{
     color:white;
     display: block;
     user-select: none;
+    cursor: pointer;
 }
 
 
